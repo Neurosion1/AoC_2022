@@ -7,8 +7,7 @@
 
 #include <iostream>
 #include <fstream>
-#include <set>
-#include <vector>
+#include <string>
 
 namespace
 {
@@ -32,42 +31,33 @@ int main(int argc, const char * argv[]) {
   
   int elf_count = 0;
   long long total_1 = 0, total_2 = 0;
-  std::set<char> badge_accum;
+  std::string badge;
   while (!input.eof()) {
-    ++elf_count;
-    std::set<char> front, back, badge;
     std::string s;
     input >> s;
-    auto fiter = s.begin();
-    auto biter = s.rbegin();
-    for (; fiter != biter.base(); ++fiter, ++biter) {
-      front.insert(*fiter);
-      back.insert(*biter);
-      badge.insert(*fiter);
-      badge.insert(*biter);
+    std::string front = s.substr(0, s.size() / 2), back = s.substr(s.size() / 2);
+    for (char c : front) {
+      size_t pos = back.find_first_of(c);
+      if (pos != std::string::npos) {
+        total_1 += score(c);
+        break;
+      }
     }
-    std::vector<char> intersection;
-    std::set_intersection(front.begin(), front.end(),
-                          back.begin(), back.end(),
-                          std::back_inserter(intersection));
-    assert(intersection.size() == 1);
-    total_1 += score(intersection.front());
-    if (elf_count == 1) {
-      badge_accum = badge;
+    std::sort(s.begin(), s.end());
+    if (++elf_count % 3 == 1) {
+      badge.swap(s);
     }
     else {
-      std::set<char> badge_intersection;
-      std::set_intersection(badge_accum.begin(), badge_accum.end(),
-                            badge.begin(), badge.end(),
-                            std::inserter(badge_intersection, badge_intersection.begin()));
-      if (elf_count == 3) {
-        assert(badge_intersection.size() == 1);
-        total_2 += score(*badge_intersection.begin());
-        badge_accum.clear();
-        elf_count = 0;
+      std::string intersection;
+      std::set_intersection(badge.begin(), badge.end(),
+                            s.begin(), s.end(),
+                            std::back_inserter(intersection));
+      if (elf_count % 3 == 0) {
+        total_2 += score(*intersection.begin());
+        badge.clear();
       }
       else {
-        badge_accum = badge_intersection;
+        badge.swap(intersection);
       }
     }
   }
