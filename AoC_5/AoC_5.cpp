@@ -20,13 +20,11 @@ int main(int argc, const char * argv[]) {
   input.getline(buf, 500);
   std::deque<std::deque<char>> stacks_1(strlen(buf) / 4 + 1);
   while (strlen(buf) > 0) {
-    int index = 1;
-    while (index < strlen(buf)) {
-      if (!(buf[index] >= '1' && buf[index] <= '9')) {
-        char c = buf[index];
-        if (c != ' ') {
-          stacks_1[index / 4].push_back(c);
-        }
+    size_t index = 1, len = strlen(buf);
+    while (index < len) {
+      char c = buf[index];
+      if (c >= 'A' && c <= 'Z') {
+        stacks_1[index / 4].push_back(c);
       }
       index += 4;
     }
@@ -36,17 +34,14 @@ int main(int argc, const char * argv[]) {
   
   while (!input.eof()) {
     std::string word;
-    int count, start, end;
-    input >> word >> count >> word >> start >> word >> end;
-    for (int i = 0; i < count; ++i) {
-      stacks_1[end - 1].push_front(stacks_1[start - 1].front());
-      stacks_1[start - 1].pop_front();
-    }
-    stacks_2[end - 1].insert(stacks_2[end - 1].begin(),
-                             stacks_2[start - 1].begin(),
-                             stacks_2[start - 1].begin() + count);
-    stacks_2[start - 1].erase(stacks_2[start - 1].begin(),
-                              stacks_2[start - 1].begin() + count);
+    int count, start_n, target_n;
+    input >> word >> count >> word >> start_n >> word >> target_n;
+    auto & start_1 = stacks_1[start_n - 1], & target_1 = stacks_1[target_n - 1];
+    target_1.insert(target_1.begin(), std::reverse_iterator(start_1.begin() + count), start_1.rend());
+    start_1.erase(start_1.begin(), start_1.begin() + count);
+    auto & start_2 = stacks_2[start_n - 1], & target_2 = stacks_2[target_n - 1];
+    target_2.insert(target_2.begin(), start_2.begin(), start_2.begin() + count);
+    start_2.erase(start_2.begin(), start_2.begin() + count);
   }
   
   std::string p1, p2;
