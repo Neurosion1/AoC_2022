@@ -16,9 +16,9 @@ int main(int argc, const char * argv[]) {
     return 1;
   }
   
-  std::deque<std::deque<char>> stacks_1(9);
   char buf[500];
   input.getline(buf, 500);
+  std::deque<std::deque<char>> stacks_1(strlen(buf) / 4 + 1);
   while (strlen(buf) > 0) {
     int index = 1;
     while (index < strlen(buf)) {
@@ -50,7 +50,7 @@ int main(int argc, const char * argv[]) {
   }
   
   std::string p1, p2;
-  for (int i = 0; i < 9; ++i) {
+  for (int i = 0; i < stacks_1.size(); ++i) {
     p1 += stacks_1[i].front();
     p2 += stacks_2[i].front();
   }
