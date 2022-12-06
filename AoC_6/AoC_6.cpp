@@ -8,20 +8,20 @@
 #include <iostream>
 #include <fstream>
 #include <string>
-#include <unordered_map>
 
 namespace
 {
   int find_distinct_sequence_offset(const std::string& signal, int goal_length)
   {
     int distinct_sequence_length = 0, index = 0;
-    std::unordered_map<char, int> tracker;
+    int tracker[26] = {};
     while (index < signal.size()) {
-      tracker[signal[index]]++;
-      if (tracker[signal[index]] == 1) {
+      int char_in = signal[index] - 'a';
+      int count = ++tracker[char_in];
+      if (count == 1) {
         ++distinct_sequence_length;
       }
-      else if (tracker[signal[index]] == 2) {
+      else if (count == 2) {
         --distinct_sequence_length;
       }
       ++index;
@@ -29,11 +29,12 @@ namespace
         return index;
       }
       if (index >= goal_length) {
-        tracker[signal[index - goal_length]]--;
-        if (tracker[signal[index - goal_length]] == 1) {
+        int char_out = signal[index - goal_length] - 'a';
+        count = --tracker[char_out];
+        if (count == 1) {
           ++distinct_sequence_length;
         }
-        else if (tracker[signal[index - goal_length]] == 0) {
+        else if (count == 0) {
           --distinct_sequence_length;
         }
       }
