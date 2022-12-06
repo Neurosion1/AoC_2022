@@ -17,12 +17,8 @@ namespace
     int tracker[26] = {};
     while (index < signal.size()) {
       int char_in = signal[index] - 'a';
-      int count = ++tracker[char_in];
-      if (count == 1) {
+      if (++tracker[char_in] == 1) {
         ++distinct_sequence_length;
-      }
-      else if (count == 2) {
-        --distinct_sequence_length;
       }
       ++index;
       if (distinct_sequence_length == goal_length) {
@@ -30,11 +26,7 @@ namespace
       }
       if (index >= goal_length) {
         int char_out = signal[index - goal_length] - 'a';
-        count = --tracker[char_out];
-        if (count == 1) {
-          ++distinct_sequence_length;
-        }
-        else if (count == 0) {
+        if (--tracker[char_out] == 0) {
           --distinct_sequence_length;
         }
       }
