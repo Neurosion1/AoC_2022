@@ -16,8 +16,7 @@ namespace
     int distinct_sequence_length = 0, index = 0;
     int tracker[26] = {};
     while (index < signal.size()) {
-      int char_in = signal[index] - 'a';
-      if (++tracker[char_in] == 1) {
+      if (++tracker[signal[index] - 'a'] == 1) {
         ++distinct_sequence_length;
       }
       ++index;
@@ -25,8 +24,7 @@ namespace
         return index;
       }
       if (index >= goal_length) {
-        int char_out = signal[index - goal_length] - 'a';
-        if (--tracker[char_out] == 0) {
+        if (--tracker[signal[index - goal_length] - 'a'] == 0) {
           --distinct_sequence_length;
         }
       }
