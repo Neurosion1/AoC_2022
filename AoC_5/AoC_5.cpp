@@ -18,7 +18,7 @@ int main(int argc, const char * argv[]) {
   
   char buf[500];
   input.getline(buf, 500);
-  std::deque<std::deque<char>> stacks_1(strlen(buf) / 4 + 1);
+  std::deque<std::string> stacks_1(strlen(buf) / 4 + 1);
   while (strlen(buf) > 0) {
     size_t index = 1, len = strlen(buf);
     while (index < len) {
@@ -40,7 +40,9 @@ int main(int argc, const char * argv[]) {
     target_1.insert(target_1.begin(), std::reverse_iterator(start_1.begin() + count), start_1.rend());
     start_1.erase(start_1.begin(), start_1.begin() + count);
     auto & start_2 = stacks_2[start_n - 1], & target_2 = stacks_2[target_n - 1];
-    target_2.insert(target_2.begin(), start_2.begin(), start_2.begin() + count);
+    target_2.insert(0, start_2.substr(0, count));
+    // The following works for any container, but substr() is faster for string.
+    // target_2.insert(target_2.begin(), start_2.begin(), start_2.begin() + count);
     start_2.erase(start_2.begin(), start_2.begin() + count);
   }
   
