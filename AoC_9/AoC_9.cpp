@@ -10,6 +10,7 @@
 #include <set>
 #include <vector>
 #include <array>
+#include <cassert>
 
 namespace
 {
@@ -17,6 +18,10 @@ namespace
                               eRD    = 5, eLD   = 6, eRU   = 9, eLU = 10 };
   Dir move_link(std::pair<int, int>& H, std::pair<int, int>& T, Dir dir)
   {
+    if (std::abs(T.first - H.first) > 2 || std::abs(T.second - H.second) > 2) {
+      assert(false);
+    }
+
     int x_diff = (H.first  - T.first);
     int y_diff = (H.second - T.second);
     std::pair<int, int> T_start = T;
@@ -24,11 +29,11 @@ namespace
     if (abs(x_diff) > 1 || abs(y_diff) > 1) {
       if (x_diff != 0 && y_diff != 0) {
         if (dir == Dir::eRight || dir == Dir::eLeft) {
-          T.second = H.second;
+          T.second += (y_diff > 0 ? 1 : -1);
           y_diff = 0;
         }
         else if (dir == Dir::eUp || dir == Dir::eDown) {
-          T.first = H.first;
+          T.first += (x_diff > 0 ? 1 : -1);
           x_diff = 0;
         }
         else // Diagonal move
@@ -58,11 +63,15 @@ namespace
         }
       }
       if (x_diff == 0) {
-        T.second = H.second + (dir == Dir::eDown ? -1 : 1 );
+        T.second += (0 != (static_cast<int>(dir) & static_cast<int>(Dir::eDown))  ? 1 : -1);
       }
       else if (y_diff == 0) {
-        T.first = H.first + (dir == Dir::eRight ? -1 : 1);
+        T.first  += (0 != (static_cast<int>(dir) & static_cast<int>(Dir::eRight)) ? 1 : -1);
       }
+    }
+
+    if (std::abs(T.first - T_start.first) > 1 || std::abs(T.second - T_start.second) > 1) {
+      assert(false);
     }
     Dir retval = Dir::eNone;
     if (T.first < T_start.first) {
@@ -103,7 +112,8 @@ int main(int argc, const char * argv[]) {
   }
   
   visited.insert( { 0, 0 });
-  for (auto item : items) {
+  for (int index = 0; index < items.size(); ++index) {
+    auto item = items[index];
     Dir dir = Dir::eNone;
     switch (item.first)
     {
@@ -134,7 +144,8 @@ int main(int argc, const char * argv[]) {
   visited.insert( { 0, 0 });
   std::array<std::pair<int, int>, 10> links;
   links.fill( { 0, 0 });
-  for (auto item : items) {
+  for (size_t index = 0; index < items.size(); ++index) {
+    auto item = items[index];
     Dir dir = Dir::eNone;
     switch (item.first)
     {
@@ -155,44 +166,20 @@ int main(int argc, const char * argv[]) {
       }
       Dir curr_dir = dir;
       for (int j = 0; j < 9 && curr_dir != Dir::eNone; ++j) {
-        curr_dir = move_link(links[j], links[j + 1], curr_dir);
+        curr_dir = move_link(links[j], links[j + 1], curr_dir);        
       }
-      min_x = std::min(min_x, links[9].first);
-      min_y = std::min(min_y, links[9].second);
-      max_x = std::max(max_x, links[9].first);
-      max_y = std::max(max_y, links[9].second);
+      min_x = std::min(min_x, links[0].first);
+      min_y = std::min(min_y, links[0].second);
+      max_x = std::max(max_x, links[0].first);
+      max_y = std::max(max_y, links[0].second);
+      //print_chain(links, min_x, max_x, min_y, max_y);
       visited.insert( { links[9].first, links[9].second });
-      for (int y = -10; y < 10; ++y) {
-        for (int x = -10; x < 10; ++x) {
-          int found = -1;
-          for (int i = 0; i < 10 && found < 0; ++i) {
-            if (links[i].first == x && links[i].second == y) {
-              found = i;
-            }
-          }
-          std::cout << static_cast<char>(found == -1 ? ' ' : '1' + found);
-        }
-        std::cout << '\n';
-      }
-      std::cout << '\n';
-    }
-  }
 #if 0
-  for (int y = min_y; y < max_y + 1; ++y) {
-    for (int x = min_x; x < max_x + 1; ++x) {
-      if (visited.count( { x, y }) == 1) {
-        std::cout << '#';
-      }
-      else {
-        std::cout << ' ';
-      }
-    }
-    std::cout << '\n';
-  }
+      print_chain(links, min_x, max_x, min_y, max_y);
 #endif
+    }
+  }
   std::cout << "Part Two: " << visited.size() << '\n';
-  
-  // 2574 too high
   
   return 0;
 }
