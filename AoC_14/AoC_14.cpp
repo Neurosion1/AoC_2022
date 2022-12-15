@@ -26,8 +26,8 @@ namespace
     int grains = 0;
     while (!done) {
       Point2D grain = source;
-      bool rested = false;
-      while (!rested && !done) {
+      bool at_rest = false;
+      while (!at_rest && !done) {
         if (grain.y_ == map.size() - 1) {
           done = true;
         }
@@ -36,16 +36,16 @@ namespace
             ++grain.y_;
           }
           else if (map[grain.y_ + 1][grain.x_ - 1] == '.') {
-            ++grain.y_;
             --grain.x_;
+            ++grain.y_;
           }
           else if (map[grain.y_ + 1][grain.x_ + 1] == '.') {
-            ++grain.y_;
             ++grain.x_;
+            ++grain.y_;
           }
           else {
             ++grains;
-            rested = true;
+            at_rest = true;
             map[grain.y_][grain.x_] = 'o';
             if (grain.y_ == 0) {
               done = true;
@@ -54,6 +54,7 @@ namespace
         }
       }
     }
+    
     return grains;
   }
 }
@@ -66,7 +67,7 @@ int main(int argc, const char * argv[]) {
   }
   
   int min_x = INT_MAX, max_x = INT_MIN, max_y = INT_MIN;
-  std::vector<std::vector<Point2D>> raw_seams;
+  std::vector<std::vector<Point2D>> seams;
   while (!input.eof()) {
     std::string line;
     std::getline(input, line);
@@ -82,44 +83,35 @@ int main(int argc, const char * argv[]) {
       max_y = std::max(this_point.y_, max_y);
       this_seam.push_back(this_point);
     }
-    raw_seams.push_back(this_seam);
+    seams.push_back(this_seam);
   }
   
-  std::string map_line((max_x - min_x) + 3, '.');
-  std::vector<std::string> part_one_map(max_y + 1, map_line);
-  for (auto & seam : raw_seams) {
+  std::string part_one_line((max_x - min_x) + 3, '.');
+  std::vector<std::string> part_one_map(max_y + 1, part_one_line);
+  for (auto & seam : seams) {
     for (Point2D & point : seam) {
       point.x_ -= (min_x - 1);
     }
   }
   
-  for (auto seam : raw_seams) {
+  for (auto seam : seams) {
     Point2D point = seam[0];
+    part_one_map[point.y_][point.x_] = '#';
     for (int i = 1; i < seam.size(); ++i) {
       Point2D new_point = seam[i];
       if (point.x_ == new_point.x_) {
-        if (point.y_ < new_point.y_) {
-          for (int y = point.y_; y <= new_point.y_; ++y) {
-            part_one_map[y][point.x_] = '#';
-          }
-        }
-        else {
-          for (int y = point.y_; y >= new_point.y_; --y) {
-            part_one_map[y][point.x_] = '#';
-          }
-        }
+        int inc = (point.y_ < new_point.y_ ? 1 : -1);
+        do {
+          point.y_ += inc;
+          part_one_map[point.y_][point.x_] = '#';
+        } while (point.y_ != new_point.y_);
       }
       else {
-        if (point.x_ < new_point.x_) {
-          for (int x = point.x_; x <= new_point.x_; ++x) {
-            part_one_map[point.y_][x] = '#';
-          }
-        }
-        else {
-          for (int x = point.x_; x >= new_point.x_; --x) {
-            part_one_map[point.y_][x] = '#';
-          }
-        }
+        int inc = (point.x_ < new_point.x_ ? 1 : -1);
+        do {
+          point.x_ += inc;
+          part_one_map[point.y_][point.x_] = '#';
+        } while (point.x_ != new_point.x_);
       }
       point = new_point;
     }
@@ -127,7 +119,7 @@ int main(int argc, const char * argv[]) {
   Point2D part_one_source = { 0, (500 - min_x) + 1 };
   std::cout << "Part One: " << simulate(part_one_map, part_one_source) << '\n';
   
-  int offset = 500;
+  int offset = 200;
   std::string part_two_line(offset * 2, '.');
   std::vector<std::string> part_two_map(max_y + 3, part_two_line);
   for (int y = 0; y < part_one_map.size(); ++y) {
