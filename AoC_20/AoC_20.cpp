@@ -24,26 +24,25 @@ namespace
     return it == l.begin() ? --l.end() : std::prev(it);
   }
 
-  void run(const std::vector<long long>& originals, std::list<std::vector<long long>::const_iterator>& iterators)
+  void mix(const std::vector<long long>& originals, std::list<std::vector<long long>::const_iterator>& iterators)
   {
-    long long length = originals.size();
+    long long erased_length = originals.size() - 1;
     for (auto original_iter = originals.cbegin(); original_iter != originals.cend(); ++original_iter) {
       long long number = *original_iter;
       if (number == 0) {
         continue;
       }
       
-      if (number < -(length - 1)) {
-        number += (abs(number) / (length - 1) * (length - 1));
-      }
-      else if (number >= (length - 1)){
-        number = (number % (length - 1));
-      }
-      
       for (auto iter = iterators.cbegin(); iter != iterators.cend(); ++iter) {
         if (*iter == original_iter) {
           auto start_iter = iter;
           iter = iterators.erase(iter);
+          if (number < -erased_length) {
+            number += (number / -erased_length) * erased_length;
+          }
+          else if (number >= erased_length) {
+            number %= erased_length;
+          }
           for (int i = 0; i < abs(number); ++i) {
             if (number < 0) {
               iter = circularDec(iterators, iter);
@@ -99,7 +98,7 @@ int main(int argc, const char * argv[]) {
     iterators.push_back(iter);
   }
   
-  run(originals, iterators);
+  mix(originals, iterators);
   
   long long part_one_answer = score(iterators);
   std::cout << "Part One: " << part_one_answer << '\n';
@@ -114,7 +113,7 @@ int main(int argc, const char * argv[]) {
   }
   
   for (int i = 0; i < 10; ++i) {
-    run(originals, iterators);
+    mix(originals, iterators);
   }
   
   long long part_two_answer = score(iterators);
