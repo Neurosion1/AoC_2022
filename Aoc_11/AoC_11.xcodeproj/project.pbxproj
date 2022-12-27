@@ -25,7 +25,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		EE307D292946129F009E6582 /* Aoc_11 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Aoc_11; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE307D292946129F009E6582 /* AoC_11 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = AoC_11; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE307D2C2946129F009E6582 /* AoC_11.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AoC_11.cpp; sourceTree = "<group>"; };
 		EE307D33294612D7009E6582 /* AoC_11_input.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AoC_11_input.dat; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -53,7 +53,7 @@
 		EE307D2A2946129F009E6582 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EE307D292946129F009E6582 /* Aoc_11 */,
+				EE307D292946129F009E6582 /* AoC_11 */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -61,9 +61,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		EE307D282946129F009E6582 /* Aoc_11 */ = {
+		EE307D282946129F009E6582 /* AoC_11 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = EE307D302946129F009E6582 /* Build configuration list for PBXNativeTarget "Aoc_11" */;
+			buildConfigurationList = EE307D302946129F009E6582 /* Build configuration list for PBXNativeTarget "AoC_11" */;
 			buildPhases = (
 				EE307D252946129F009E6582 /* Sources */,
 				EE307D262946129F009E6582 /* Frameworks */,
@@ -73,9 +73,9 @@
 			);
 			dependencies = (
 			);
-			name = Aoc_11;
+			name = AoC_11;
 			productName = Aoc_11;
-			productReference = EE307D292946129F009E6582 /* Aoc_11 */;
+			productReference = EE307D292946129F009E6582 /* AoC_11 */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -92,7 +92,7 @@
 					};
 				};
 			};
-			buildConfigurationList = EE307D242946129F009E6582 /* Build configuration list for PBXProject "Aoc_11" */;
+			buildConfigurationList = EE307D242946129F009E6582 /* Build configuration list for PBXProject "AoC_11" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -105,7 +105,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				EE307D282946129F009E6582 /* Aoc_11 */,
+				EE307D282946129F009E6582 /* AoC_11 */,
 			);
 		};
 /* End PBXProject section */
@@ -252,7 +252,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		EE307D242946129F009E6582 /* Build configuration list for PBXProject "Aoc_11" */ = {
+		EE307D242946129F009E6582 /* Build configuration list for PBXProject "AoC_11" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EE307D2E2946129F009E6582 /* Debug */,
@@ -261,7 +261,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EE307D302946129F009E6582 /* Build configuration list for PBXNativeTarget "Aoc_11" */ = {
+		EE307D302946129F009E6582 /* Build configuration list for PBXNativeTarget "AoC_11" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EE307D312946129F009E6582 /* Debug */,
