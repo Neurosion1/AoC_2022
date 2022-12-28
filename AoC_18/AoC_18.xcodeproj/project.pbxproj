@@ -7,22 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EEB2F323295CB89500F49AC5 /* AoC_18_input.dat in CopyFiles */ = {isa = PBXBuildFile; fileRef = EEB2F322295CB88800F49AC5 /* AoC_18_input.dat */; };
 		EEB3141E295CACDB00D22E06 /* AoC_18.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EEB3141D295CACDA00D22E06 /* AoC_18.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		EEB31411295CACC600D22E06 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 16;
 			files = (
+				EEB2F323295CB89500F49AC5 /* AoC_18_input.dat in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		EEB2F322295CB88800F49AC5 /* AoC_18_input.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AoC_18_input.dat; sourceTree = "<group>"; };
 		EEB31413295CACC600D22E06 /* AoC_18 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = AoC_18; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEB3141D295CACDA00D22E06 /* AoC_18.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AoC_18.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -41,6 +44,7 @@
 		EEB3140A295CACC600D22E06 = {
 			isa = PBXGroup;
 			children = (
+				EEB2F322295CB88800F49AC5 /* AoC_18_input.dat */,
 				EEB3141D295CACDA00D22E06 /* AoC_18.cpp */,
 				EEB31414295CACC600D22E06 /* Products */,
 			);
