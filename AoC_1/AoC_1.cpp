@@ -7,8 +7,8 @@
 
 #include <iostream>
 #include <fstream>
-#include <numeric>
-#include <set>
+#include <vector>
+#include <algorithm>
 
 int main(int argc, const char * argv[]) {
   std::ifstream input("AoC_1_input.dat");
@@ -17,7 +17,7 @@ int main(int argc, const char * argv[]) {
     return 1;
   }
   
-  std::set<long long> all_sums;
+  std::vector<long long> all_sums;
   int sum = 0;
   while (!input.eof()) {
     char buf[100] = { 0 };
@@ -26,12 +26,13 @@ int main(int argc, const char * argv[]) {
       sum += atoi(buf);
     }
     if (strlen(buf) == 0 || input.eof()) {
-      all_sums.insert(sum);
+      all_sums.push_back(sum);
       sum = 0;
     }
   }
   
-  auto iter = all_sums.rbegin();
+  std::sort(all_sums.begin(), all_sums.end(), std::greater<long long>());
+  auto iter = all_sums.begin();
   long long total = *iter++;
   std::cout << "Part One: " << total << '\n';
   

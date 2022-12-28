@@ -69,7 +69,7 @@ int main(int argc, const char * argv[]) {
   }
   
   std::vector<Point2D> part_two_starts;
-  Point2D start, target;;
+  Point2D start, target;
   for (int y = 0; y < map.size(); ++y) {
     for (int x = 0; x < map[0].size(); ++x) {
       if (map[y][x] == 'S') {

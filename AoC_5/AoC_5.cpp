@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <string>
 #include <deque>
 
 int main(int argc, const char * argv[]) {

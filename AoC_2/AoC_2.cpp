@@ -6,8 +6,6 @@
 //
 #include <iostream>
 #include <fstream>
-#include <numeric>
-#include <set>
 
 int main(int argc, const char * argv[]) {
   std::ifstream input("AoC_2_input.dat");

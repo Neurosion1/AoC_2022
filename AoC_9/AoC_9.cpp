@@ -172,11 +172,7 @@ int main(int argc, const char * argv[]) {
       min_y = std::min(min_y, links[0].second);
       max_x = std::max(max_x, links[0].first);
       max_y = std::max(max_y, links[0].second);
-      //print_chain(links, min_x, max_x, min_y, max_y);
       visited.insert( { links[9].first, links[9].second });
-#if 0
-      print_chain(links, min_x, max_x, min_y, max_y);
-#endif
     }
   }
   std::cout << "Part Two: " << visited.size() << '\n';
