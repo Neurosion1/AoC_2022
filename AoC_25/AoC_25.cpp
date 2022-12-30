@@ -62,6 +62,9 @@ namespace
         }
       }
     }
+    if (carry > 0) {
+      retval.push_back('0' + carry);
+    }
     
     return std::string(retval.rbegin(), retval.rend());
   }
