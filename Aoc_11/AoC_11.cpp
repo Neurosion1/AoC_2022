@@ -10,6 +10,7 @@
 #include <deque>
 #include <array>
 #include <functional>
+#include <algorithm>
 
 namespace
 {

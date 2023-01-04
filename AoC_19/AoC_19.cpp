@@ -7,6 +7,7 @@
 #include <array>
 #include <algorithm>
 #include <map>
+#include <cassert>
 
 // This could stand to be improved with some of the lessons learned from Paulson's Day 16. Specifically, "State" could be
 // reduced to a single large integer.

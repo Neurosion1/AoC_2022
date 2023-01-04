@@ -12,6 +12,7 @@
 #include <queue>
 #include <numeric>
 #include <array>
+#include <string>
 #include <utility>
 
 namespace

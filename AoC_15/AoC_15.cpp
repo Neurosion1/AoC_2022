@@ -9,6 +9,8 @@
 #include <fstream>
 #include <vector>
 #include <algorithm>
+#include <string>
+#include <cassert>
 
 namespace
 {

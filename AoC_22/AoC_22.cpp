@@ -11,6 +11,9 @@
 #include <string>
 #include <array>
 #include <map>
+#include <string>
+#include <cassert>
+#include <numeric>
 
 // NOT A GENERAL PURPOSE SOLUTION. MATCHES THE FOLLOWING CUBE NET (50x50 per side):
 //
