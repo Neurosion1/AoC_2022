@@ -5,3 +5,6 @@
 AoC_*_input.dat
 .DS_Store
 **/bin/**
+**/x64/*
+/.vs
+*.vcxproj.user

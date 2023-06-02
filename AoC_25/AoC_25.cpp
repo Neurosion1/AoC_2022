@@ -9,6 +9,7 @@
 #include <fstream>
 #include <cmath>
 #include <deque>
+#include <string>
 
 namespace
 {

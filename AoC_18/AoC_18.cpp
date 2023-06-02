@@ -11,6 +11,7 @@
 #include <list>
 #include <array>
 #include <queue>
+#include <tuple>
 
 namespace
 {

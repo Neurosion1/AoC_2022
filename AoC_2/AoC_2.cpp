@@ -6,6 +6,7 @@
 //
 #include <iostream>
 #include <fstream>
+#include <cassert>
 
 int main(int argc, const char * argv[]) {
   std::ifstream input("AoC_2_input.dat");
